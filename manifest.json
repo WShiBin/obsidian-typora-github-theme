@@ -1,9 +1,9 @@
 {
-  "name": "Typora GitHub Theme",
+  "name": "GitHub Style Theme",
   "version": "1.0.0",
   "minAppVersion": "1.0.0",
   "author": "shibin",
   "authorUrl": "https://github.com/WShiBin",
   "fundingUrl": "",
-  "description": "A clean Obsidian theme inspired by Typora's GitHub theme, replicating the familiar GitHub-flavored Markdown reading and editing experience."
+  "description": "A clean Obsidian theme inspired by GitHub's markdown style, replicating a familiar GitHub-flavored Markdown reading and editing experience."
 }

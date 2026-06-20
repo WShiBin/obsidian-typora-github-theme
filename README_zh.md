@@ -1,11 +1,11 @@
 <p align="center">
-  <img src="https://raw.githubusercontent.com/WShiBin/obsidian-typora-github-theme/main/assets/icon.png" alt="Typora GitHub Theme" width="128" height="128">
+  <img src="https://raw.githubusercontent.com/WShiBin/obsidian-typora-github-theme/main/assets/icon.png" alt="GitHub Style Theme" width="128" height="128">
 </p>
 
-<h1 align="center">Typora GitHub Theme for Obsidian</h1>
+<h1 align="center">GitHub Style Theme for Obsidian</h1>
 
 <p align="center">
-  <strong>一款灵感来自 Typora GitHub 主题的清爽 Obsidian 主题</strong>
+  <strong>一款灵感来自 GitHub Markdown 风格的清爽 Obsidian 主题</strong>
 </p>
 
 <p align="center">
@@ -30,19 +30,19 @@
 
 ![截图](https://raw.githubusercontent.com/WShiBin/obsidian-typora-github-theme/main/assets/screenshot.png)
 
-<p align="center"><small><em>Typora 风格设置对话框</em></small></p>
+<p align="center"><small><em>GitHub 风格设置对话框</em></small></p>
 
 ![截图](https://raw.githubusercontent.com/WShiBin/obsidian-typora-github-theme/main/assets/screenshot-settings.png)
 
 ## 特性
 
 - 🎨 **GitHub 风格 Markdown** — 熟悉的 GitHub 样式，支持标题、表格、引用、代码块等
-- 📐 **自适应编辑器宽度** — 内容宽度根据屏幕尺寸自动调整（860px / 1024px / 1200px），如 Typora 般流畅
-- �️ **图片居中显示** — 阅读视图和编辑视图中的图片默认居中，与 Typora 行为一致
-- �🖋️ **Typora 排版** — 精心匹配的字体系列、间距和行高，带来清爽的写作体验
+- 📐 **自适应编辑器宽度** — 内容宽度根据屏幕尺寸自动调整（860px / 1024px / 1200px），提供专注的写作体验
+- ️ **图片居中显示** — 阅读视图和编辑视图中的图片默认居中
+- 🖋️ **GitHub 排版** — 精心匹配的字体系列、间距和行高，带来清爽的写作体验
 - 🌙 **浅色 & 深色模式** — 支持浅色和深色两种模式，自动跟随系统检测，匹配 GitHub 的浅色和深色主题
 - ⚡ **性能优化** — 禁用不必要的动画和视觉效果，体验丝滑流畅
-- 🪟 **设置对话框样式** — Typora 风格的首选项面板，精致表单控件
+- 🪟 **设置对话框样式** — GitHub 风格的首选项面板，精致表单控件
 
 ## 安装
 
@@ -50,14 +50,14 @@
 
 1. 打开 **设置** → **外观**
 2. 在 **主题** 下，点击 **浏览**
-3. 搜索 **"Typora GitHub Theme"**
+3. 搜索 **"GitHub Style Theme"**
 4. 点击 **安装**，然后点击 **切换**
 
 ### 手动安装
 
 1. 从[发布页面](https://github.com/WShiBin/obsidian-typora-github-theme/releases)下载最新版本
 2. 将内容解压到你的 vault 的 `.obsidian/themes/` 目录下
-3. 进入 **设置** → **外观** → **主题**，选择 **Typora GitHub Theme**
+3. 进入 **设置** → **外观** → **主题**，选择 **GitHub Style Theme**
 
 ## 开发
 

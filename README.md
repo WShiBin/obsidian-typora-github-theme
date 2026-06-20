@@ -1,11 +1,11 @@
 <p align="center">
-  <img src="https://raw.githubusercontent.com/WShiBin/obsidian-typora-github-theme/main/assets/icon.png" alt="Typora GitHub Theme" width="128" height="128">
+  <img src="https://raw.githubusercontent.com/WShiBin/obsidian-typora-github-theme/main/assets/icon.png" alt="GitHub Style Theme" width="128" height="128">
 </p>
 
-<h1 align="center">Typora GitHub Theme for Obsidian</h1>
+<h1 align="center">GitHub Style Theme for Obsidian</h1>
 
 <p align="center">
-  <strong>A clean Obsidian theme inspired by Typora's GitHub theme</strong>
+  <strong>A clean Obsidian theme inspired by GitHub's markdown style</strong>
 </p>
 
 <p align="center">
@@ -30,19 +30,19 @@
 
 ![Screenshot](https://raw.githubusercontent.com/WShiBin/obsidian-typora-github-theme/main/assets/screenshot.png)
 
-<p align="center"><small><em>Settings dialog with Typora-inspired styling</em></small></p>
+<p align="center"><small><em>Settings dialog with GitHub-inspired styling</em></small></p>
 
 ![Screenshot](https://raw.githubusercontent.com/WShiBin/obsidian-typora-github-theme/main/assets/screenshot-settings.png)
 
 ## Features
 
 - 🎨 **GitHub-Flavored Markdown** — Familiar GitHub styling for headings, tables, blockquotes, code blocks, and more
-- 📐 **Adaptive Editor Width** — Content width adjusts to your screen size (860px / 1024px / 1200px), just like Typora
-- �️ **Centered Images** — Images are automatically centered in both reading and editing views, just like Typora
-- �🖋️ **Typora Typography** — Carefully matched font stack, spacing, and line heights for a clean writing experience
+- 📐 **Adaptive Editor Width** — Content width adjusts to your screen size (860px / 1024px / 1200px) for a focused writing experience
+- ️ **Centered Images** — Images are automatically centered in both reading and editing views
+- 🖋️ **GitHub Typography** — Carefully matched font stack, spacing, and line heights for a clean writing experience
 - 🌙 **Light & Dark Mode** — Supports both light and dark modes with system-level detection, matching GitHub's light and dark themes
 - ⚡ **Performance Optimized** — Disables unnecessary animations and visual effects for a snappy experience
-- 🪟 **Settings Dialog Styling** — Typora-inspired preferences panel with polished form controls
+- 🪟 **Settings Dialog Styling** — GitHub-inspired preferences panel with polished form controls
 
 ## Installation
 
@@ -50,14 +50,14 @@
 
 1. Open **Settings** → **Appearance**
 2. Under **Themes**, click **Browse**
-3. Search for **"Typora GitHub Theme"**
+3. Search for **"GitHub Style Theme"**
 4. Click **Install** and then **Switch**
 
 ### Manual Installation
 
 1. Download the latest release from the [releases page](https://github.com/WShiBin/obsidian-typora-github-theme/releases)
 2. Extract the contents to your vault's `.obsidian/themes/` directory
-3. Go to **Settings** → **Appearance** → **Themes** and select **Typora GitHub Theme**
+3. Go to **Settings** → **Appearance** → **Themes** and select **GitHub Style Theme**
 
 ## Development
 

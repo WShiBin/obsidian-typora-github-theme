@@ -28,11 +28,11 @@
 
 <p align="center"><small><em>GitHub 风格 Markdown 渲染的主编辑器视图</em></small></p>
 
-![截图](https://raw.githubusercontent.com/WShiBin/obsidian-typora-github-theme/main/assets/screenshot.png)
+![截图](https://raw.githubusercontent.com/WShiBin/obsidian-typora-github-theme/refs/heads/master/assets/screenshot.png)
 
 <p align="center"><small><em>GitHub 风格设置对话框</em></small></p>
 
-![截图](https://raw.githubusercontent.com/WShiBin/obsidian-typora-github-theme/main/assets/screenshot-settings.png)
+![截图](https://raw.githubusercontent.com/WShiBin/obsidian-typora-github-theme/refs/heads/master/assets/screenshot-settings.png)
 
 ## 特性
 

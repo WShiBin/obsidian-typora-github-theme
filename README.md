@@ -28,11 +28,11 @@
 
 <p align="center"><small><em>Main editor view with GitHub-styled markdown rendering</em></small></p>
 
-![Screenshot](https://raw.githubusercontent.com/WShiBin/obsidian-typora-github-theme/main/assets/screenshot.png)
+![Screenshot](https://raw.githubusercontent.com/WShiBin/obsidian-typora-github-theme/refs/heads/master/assets/screenshot.png)
 
 <p align="center"><small><em>Settings dialog with GitHub-inspired styling</em></small></p>
 
-![Screenshot](https://raw.githubusercontent.com/WShiBin/obsidian-typora-github-theme/main/assets/screenshot-settings.png)
+![Screenshot](https://raw.githubusercontent.com/WShiBin/obsidian-typora-github-theme/refs/heads/master/assets/screenshot-settings.png)
 
 ## Features
 

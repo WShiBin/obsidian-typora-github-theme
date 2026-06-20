@@ -1,8 +1,8 @@
 <p align="center">
-  <img src="https://raw.githubusercontent.com/WShiBin/obsidian-typora-github-theme/main/assets/icon.png" alt="GitHub Style" width="128" height="128">
+  <img src="https://raw.githubusercontent.com/WShiBin/obsidian-typora-github-theme/refs/heads/master/assets/icon.png" alt="GitHub Style" width="128" height="128">
 </p>
 
-<h1 align="center">GitHub Style Theme for Obsidian</h1>
+<h1 align="center">GitHub Style</h1>
 
 <p align="center">
   <strong>一款灵感来自 GitHub Markdown 风格的清爽 Obsidian 主题</strong>

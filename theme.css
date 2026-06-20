@@ -1,0 +1,1412 @@
+/* =============================================================================
+   GitHub Theme for Obsidian — based on Typora's github.css
+   Overlays on top of your existing Obsidian theme, matching Typora's GitHub look.
+   ============================================================================= */
+
+/* -----------------------------------------------------------------------------
+   1. CSS Variables — UI Colors & Typography Foundation
+   ----------------------------------------------------------------------------- */
+.theme-light {
+  /* Backgrounds */
+  --background-primary: #ffffff;
+  --background-secondary: #fafafa;
+  --background-primary-alt: #fafafa;
+  --background-secondary-alt: #f0f0f0;
+  --background-tertiary: #f0f0f0;
+  --background-modifier-border: #e5e5e5;
+  --background-modifier-border-hover: #d0d0d0;
+  --background-modifier-border-focus: #c0c0c0;
+  --background-modifier-form-field: #ffffff;
+
+  /* Code backgrounds */
+  --code-background: #f8f8f8;
+  --code-normal: #333333;
+
+  /* Text */
+  --text-normal: #333333;
+  --text-muted: #777777;
+  --text-faint: #999999;
+  --text-accent: #4183c4;
+  --text-accent-hover: #3772a5;
+
+  /* Paragraph & heading spacing — Typora uses 0.8em for blocks, 1rem for headings */
+  --p-spacing: 0.8em;
+  --heading-spacing: 1rem;
+
+  /* Links */
+  --link-color: #4183c4;
+  --link-color-hover: #3772a5;
+  --link-external-color: #4183c4;
+  --link-external-color-hover: #3772a5;
+
+  /* Blockquote */
+  --blockquote-border-color: #dfe2e5;
+  --blockquote-border-thickness: 4px;
+  --blockquote-color: #777777;
+  --blockquote-background-color: transparent;
+  --blockquote-font-style: normal;
+
+  /* Tables */
+  --table-border-color: #dfe2e5;
+  --table-header-background: #f8f8f8;
+  --table-header-background-hover: #f0f0f0;
+  --table-row-background-hover: #f8f8f8;
+  --table-row-alt-background: #f8f8f8;
+  --table-column-alt-background: #f8f8f8;
+
+  /* Tags */
+  --tag-color: #a7a7a7;
+  --tag-background: transparent;
+
+  /* HR */
+  --hr-color: #e7e7e7;
+  --hr-thickness: 2px;
+
+  /* Checkboxes */
+  --checkbox-color: #777777;
+  --checkbox-color-hover: #555555;
+  --checkbox-border-color: #c0c0c0;
+
+  /* Interactive */
+  --interactive-accent: #4183c4;
+  --interactive-accent-hover: #3772a5;
+
+  /* Scrollbar */
+  --scrollbar-bg: transparent;
+  --scrollbar-thumb-bg: #c0c0c0;
+  --scrollbar-active-thumb-bg: #a0a0a0;
+
+  /* File navigator */
+  --nav-item-color: #333333;
+  --nav-item-color-hover: #333333;
+  --nav-item-color-active: #333333;
+  --nav-item-background-hover: #f0f0f0;
+  --nav-item-background-active: #e8e8e8;
+  --nav-collapse-icon-color: #999999;
+
+  /* Sidebar */
+  --side-bar-bg-color: #fafafa;
+}
+
+/* -----------------------------------------------------------------------------
+   2. Font & Base Typography
+   ----------------------------------------------------------------------------- */
+body {
+  --font-text:
+    "Open Sans", "Clear Sans", "Helvetica Neue", Helvetica, Arial,
+    "Segoe UI Emoji", "SF Pro", sans-serif;
+  --font-text-size: 16px;
+  --font-text-weight: 400;
+  --line-height-normal: 1.6;
+
+  /* Headings */
+  --h1-size: 2.25em;
+  --h2-size: 1.75em;
+  --h3-size: 1.5em;
+  --h4-size: 1.25em;
+  --h5-size: 1em;
+  --h6-size: 1em;
+
+  --h1-weight: 700;
+  --h2-weight: 700;
+  --h3-weight: 700;
+  --h4-weight: 700;
+  --h5-weight: 700;
+  --h6-weight: 700;
+
+  --h1-line-height: 1.2;
+  --h2-line-height: 1.225;
+  --h3-line-height: 1.43;
+  --h4-line-height: 1.5;
+  --h5-line-height: 1.6;
+  --h6-line-height: 1.6;
+
+  /* Monospace — Typora stack: Lucida Console first */
+  --font-monospace:
+    "Lucida Console", "SF Mono", "Monaco", "Menlo", "Consolas", "Courier New",
+    monospace;
+
+  /* UI font — Typora uses Segoe UI for chrome, not Open Sans */
+  --font-interface:
+    "Segoe UI", "Arial", "Helvetica Neue", Helvetica, sans-serif;
+
+  /* Heading colors */
+  --h1-color: #333333;
+  --h2-color: #333333;
+  --h3-color: #333333;
+  --h4-color: #333333;
+  --h5-color: #333333;
+  --h6-color: #777777;
+}
+
+/* Body base */
+.markdown-source-view,
+.markdown-reading-view {
+  font-family: var(--font-text);
+  font-size: var(--font-text-size);
+  line-height: var(--line-height-normal);
+  color: var(--text-normal);
+  -webkit-font-smoothing: antialiased;
+}
+
+/* Ensure all editor/view content surfaces use the same white background */
+.markdown-source-view .cm-editor,
+.markdown-source-view .cm-scroller,
+.markdown-source-view .cm-content,
+.markdown-source-view .cm-contentContainer,
+.markdown-reading-view .markdown-preview-view,
+.markdown-reading-view .markdown-preview-sizer,
+.workspace-leaf-content .view-content,
+.workspace-leaf-content[data-type="markdown"],
+.workspace-leaf-content[data-type="empty"] {
+  background-color: #ffffff !important;
+}
+
+/* Explicit line-height on editor lines and preview paragraphs
+   to override any Obsidian-internal line-height variables */
+.markdown-source-view .cm-line,
+.markdown-source-view .cm-content,
+.markdown-reading-view .markdown-preview-section,
+.markdown-reading-view p,
+.markdown-reading-view li {
+  line-height: 1.6 !important;
+}
+
+/* Ensure monospace elements use monospace line-height,
+   but keep code blocks at their own spacing */
+.markdown-source-view .HyperMD-codeblock,
+.markdown-reading-view pre {
+  line-height: 1.42857143;
+}
+
+/* Selection highlight — Typora uses light blue #B5D6FC */
+::selection {
+  background-color: #b5d6fc;
+  color: inherit;
+}
+
+/* Mark/highlight — Typora uses yellow bg with black text */
+mark {
+  background: #ff0;
+  color: #000;
+}
+
+/* Keyboard <kbd> — Typora's realistic keycap look */
+kbd {
+  margin: 0 0.1em;
+  padding: 0.1em 0.6em;
+  font-size: 0.8em;
+  color: #242729;
+  background: #fff;
+  border: 1px solid #adb3b9;
+  border-radius: 3px;
+  box-shadow:
+    0 1px 0 rgba(12, 13, 14, 0.2),
+    0 0 0 2px #fff inset;
+  white-space: nowrap;
+  vertical-align: middle;
+  font-family: var(--font-monospace);
+}
+
+/* -----------------------------------------------------------------------------
+   3. Editor Width — Typora-Style Stepped Widths
+   Typora github.css uses:
+     - default: max-width 860px
+     - ≥1400px: max-width 1024px
+     - ≥1800px: max-width 1200px
+   ----------------------------------------------------------------------------- */
+
+/* Override Obsidian's built-in line-width variable (default 700px)
+   so it doesn't fight our width setting */
+body {
+  --file-line-width: 100%;
+}
+
+/* Reading mode */
+.markdown-reading-view .markdown-preview-sizer {
+  max-width: 860px !important;
+  width: 860px !important;
+  margin: 0 auto !important;
+}
+
+/* Live Preview / Edit mode — the actual content element */
+.markdown-source-view.mod-cm6 .cm-content {
+  max-width: 860px !important;
+  margin: 0 auto !important;
+}
+
+/* Live Preview / Edit mode — individual lines (Obsidian sets max-width here too) */
+.markdown-source-view.mod-cm6 .cm-line {
+  max-width: 860px !important;
+}
+
+/* readable-line-width class variants */
+.markdown-source-view.mod-cm6.is-readable-line-width .cm-content {
+  max-width: 860px !important;
+  margin: 0 auto !important;
+}
+
+.markdown-source-view.mod-cm6.is-readable-line-width .cm-line {
+  max-width: 860px !important;
+}
+
+/* Ensure scroller and container don't restrict width either */
+.markdown-source-view.mod-cm6 .cm-scroller {
+  max-width: none !important;
+}
+
+.markdown-source-view.mod-cm6 .cm-contentContainer {
+  max-width: none !important;
+}
+
+/* Editor bottom padding — Typora gives 100px breathing room */
+.markdown-source-view.mod-cm6 .cm-scroller {
+  padding-bottom: 100px !important;
+}
+
+.markdown-reading-view .markdown-preview-sizer {
+  padding-bottom: 100px !important;
+}
+
+/* Wider screens ≥1400px — Typora expands to 1024px */
+@media only screen and (min-width: 1400px) {
+  .markdown-reading-view .markdown-preview-sizer {
+    max-width: 1024px !important;
+    width: 1024px !important;
+  }
+  .markdown-source-view.mod-cm6 .cm-content,
+  .markdown-source-view.mod-cm6 .cm-line,
+  .markdown-source-view.mod-cm6.is-readable-line-width .cm-content,
+  .markdown-source-view.mod-cm6.is-readable-line-width .cm-line {
+    max-width: 1024px !important;
+  }
+}
+
+/* Wider screens ≥1800px — Typora expands to 1200px */
+@media only screen and (min-width: 1800px) {
+  .markdown-reading-view .markdown-preview-sizer {
+    max-width: 1200px !important;
+    width: 1200px !important;
+  }
+  .markdown-source-view.mod-cm6 .cm-content,
+  .markdown-source-view.mod-cm6 .cm-line,
+  .markdown-source-view.mod-cm6.is-readable-line-width .cm-content,
+  .markdown-source-view.mod-cm6.is-readable-line-width .cm-line {
+    max-width: 1200px !important;
+  }
+}
+
+/* Embedded notes within the reading view — keep full width */
+.markdown-reading-view .markdown-embed .markdown-preview-sizer {
+  max-width: 100% !important;
+  width: 100% !important;
+}
+
+/* Embedded notes in editor — keep full width */
+.markdown-source-view.mod-cm6 .cm-embed-block .cm-content,
+.markdown-source-view.mod-cm6 .cm-embed-block .cm-line {
+  max-width: 100% !important;
+}
+
+/* -----------------------------------------------------------------------------
+   4. Headings (h1–h6)
+   ----------------------------------------------------------------------------- */
+
+/* Reading mode headings */
+.markdown-reading-view h1,
+.markdown-preview-view h1,
+.markdown-rendered h1,
+.cm-header-1 {
+  font-size: var(--h1-size);
+  font-weight: var(--h1-weight);
+  line-height: var(--h1-line-height);
+  color: var(--h1-color);
+  margin-top: 1rem;
+  margin-bottom: 1rem;
+  padding-bottom: 0.3em;
+  border-bottom: 1px solid #eee;
+}
+
+.markdown-reading-view h2,
+.markdown-preview-view h2,
+.markdown-rendered h2,
+.cm-header-2 {
+  font-size: var(--h2-size);
+  font-weight: var(--h2-weight);
+  line-height: var(--h2-line-height);
+  color: var(--h2-color);
+  margin-top: 1rem;
+  margin-bottom: 1rem;
+  padding-bottom: 0.3em;
+  border-bottom: 1px solid #eee;
+}
+
+.markdown-reading-view h3,
+.markdown-preview-view h3,
+.markdown-rendered h3,
+.cm-header-3 {
+  font-size: var(--h3-size);
+  font-weight: var(--h3-weight);
+  line-height: var(--h3-line-height);
+  color: var(--h3-color);
+  margin-top: 1rem;
+  margin-bottom: 1rem;
+}
+
+.markdown-reading-view h4,
+.markdown-preview-view h4,
+.markdown-rendered h4,
+.cm-header-4 {
+  font-size: var(--h4-size);
+  font-weight: var(--h4-weight);
+  line-height: var(--h4-line-height);
+  color: var(--h4-color);
+  margin-top: 1rem;
+  margin-bottom: 1rem;
+}
+
+.markdown-reading-view h5,
+.markdown-preview-view h5,
+.markdown-rendered h5,
+.cm-header-5 {
+  font-size: var(--h5-size);
+  font-weight: var(--h5-weight);
+  line-height: var(--h5-line-height);
+  color: var(--h5-color);
+  margin-top: 1rem;
+  margin-bottom: 1rem;
+}
+
+.markdown-reading-view h6,
+.markdown-preview-view h6,
+.markdown-rendered h6,
+.cm-header-6 {
+  font-size: var(--h6-size);
+  font-weight: var(--h6-weight);
+  line-height: var(--h6-line-height);
+  color: var(--h6-color);
+  margin-top: 1rem;
+  margin-bottom: 1rem;
+}
+
+/* Prevent double underline from Obsidian default h1/h2 styling */
+.markdown-reading-view h1,
+.markdown-reading-view h2,
+.markdown-preview-view h1,
+.markdown-preview-view h2,
+.markdown-rendered h1,
+.markdown-rendered h2 {
+  --h1-underline: none;
+  --h2-underline: none;
+}
+
+/* -----------------------------------------------------------------------------
+   5. Paragraphs, Lists & Spacing
+   ----------------------------------------------------------------------------- */
+.markdown-reading-view p,
+.markdown-preview-view p,
+.markdown-rendered p,
+.markdown-reading-view blockquote,
+.markdown-preview-view blockquote,
+.markdown-rendered blockquote,
+.markdown-reading-view ul,
+.markdown-preview-view ul,
+.markdown-rendered ul,
+.markdown-reading-view ol,
+.markdown-preview-view ol,
+.markdown-rendered ol,
+.markdown-reading-view dl,
+.markdown-preview-view dl,
+.markdown-rendered dl {
+  margin: 0.8em 0;
+}
+
+.markdown-reading-view li > ul,
+.markdown-preview-view li > ul,
+.markdown-rendered li > ul,
+.markdown-reading-view li > ol,
+.markdown-preview-view li > ol,
+.markdown-rendered li > ol {
+  margin: 0 0;
+}
+
+.markdown-reading-view ul,
+.markdown-preview-view ul,
+.markdown-rendered ul,
+.markdown-reading-view ol,
+.markdown-preview-view ol,
+.markdown-rendered ol {
+  padding-left: 30px;
+}
+
+/* First list in document — Typora gives 30px top margin */
+.markdown-reading-view > ul:first-child,
+.markdown-preview-view > ul:first-child,
+.markdown-rendered > ul:first-child,
+.markdown-reading-view > ol:first-child,
+.markdown-preview-view > ol:first-child,
+.markdown-rendered > ol:first-child {
+  margin-top: 30px;
+}
+
+/* Last list in document — no bottom margin */
+.markdown-reading-view > ul:last-child,
+.markdown-preview-view > ul:last-child,
+.markdown-rendered > ul:last-child,
+.markdown-reading-view > ol:last-child,
+.markdown-preview-view > ol:last-child,
+.markdown-rendered > ol:last-child {
+  margin-bottom: 0;
+}
+
+/* Tighter paragraph spacing inside list items */
+.markdown-reading-view li p,
+.markdown-preview-view li p,
+.markdown-rendered li p {
+  margin: 0.5rem 0;
+}
+
+/* First child in blockquote and list items — no top margin */
+.markdown-reading-view blockquote > :first-child,
+.markdown-preview-view blockquote > :first-child,
+.markdown-rendered blockquote > :first-child,
+.markdown-reading-view li > :first-child,
+.markdown-preview-view li > :first-child,
+.markdown-rendered li > :first-child {
+  margin-top: 0;
+}
+
+/* Last child in blockquote — no bottom margin */
+.markdown-reading-view blockquote > :last-child,
+.markdown-preview-view blockquote > :last-child,
+.markdown-rendered blockquote > :last-child {
+  margin-bottom: 0;
+}
+
+/* -----------------------------------------------------------------------------
+   6. Blockquote
+   ----------------------------------------------------------------------------- */
+.markdown-reading-view blockquote,
+.markdown-preview-view blockquote,
+.markdown-rendered blockquote {
+  border-left: 4px solid #dfe2e5;
+  padding: 0 15px;
+  color: #777777;
+  margin: 0.8em 0;
+}
+
+.markdown-reading-view blockquote blockquote,
+.markdown-preview-view blockquote blockquote,
+.markdown-rendered blockquote blockquote {
+  padding-right: 0;
+}
+
+/* Editor mode blockquote lines */
+.HyperMD-quote {
+  border-left: 4px solid #dfe2e5 !important;
+  padding-left: 15px !important;
+  color: #777777 !important;
+}
+
+.HyperMD-quote.HyperMD-quote-2 {
+  border-left: 4px solid #dfe2e5 !important;
+}
+
+/* -----------------------------------------------------------------------------
+   7. Code — Inline & Blocks
+   ----------------------------------------------------------------------------- */
+
+/* Inline code */
+.markdown-reading-view code:not(pre code),
+.markdown-preview-view code:not(pre code),
+.markdown-rendered code:not(pre code) {
+  background-color: #f3f4f4;
+  border: 1px solid #e7eaed;
+  border-radius: 3px;
+  padding: 2px 4px 0px 4px;
+  font-size: 0.9em;
+  color: #333333;
+}
+
+.cm-inline-code {
+  background-color: #f3f4f4 !important;
+  border: 1px solid #e7eaed;
+  border-radius: 3px;
+  padding: 2px 4px 0px 4px;
+  font-size: 0.9em !important;
+  color: #333333 !important;
+}
+
+/* Code blocks */
+.markdown-reading-view pre,
+.markdown-preview-view pre,
+.markdown-rendered pre,
+.HyperMD-codeblock {
+  background-color: #f8f8f8 !important;
+  border: 1px solid #e7eaed;
+  border-radius: 3px;
+  padding: 8px 12px 6px 12px;
+  font-size: 0.9em;
+}
+
+/* Code block lines in editor */
+.cm-s-obsidian .HyperMD-codeblock {
+  background-color: #f8f8f8 !important;
+  border-left: 1px solid #e7eaed;
+  border-right: 1px solid #e7eaed;
+}
+
+.cm-s-obsidian .HyperMD-codeblock-begin {
+  border-top: 1px solid #e7eaed;
+  border-top-left-radius: 3px;
+  border-top-right-radius: 3px;
+  padding-top: 8px !important;
+}
+
+.cm-s-obsidian .HyperMD-codeblock-end {
+  border-bottom: 1px solid #e7eaed;
+  border-bottom-left-radius: 3px;
+  border-bottom-right-radius: 3px;
+  padding-bottom: 6px !important;
+}
+
+/* Reading mode code block */
+.markdown-reading-view pre code,
+.markdown-preview-view pre code,
+.markdown-rendered pre code {
+  background-color: transparent;
+  border: none;
+  padding: 0;
+  font-size: inherit;
+}
+
+/* Language tag */
+.cm-s-obsidian span.cm-formatting-code-block ~ span.cm-lang,
+.markdown-rendered .code-block-flair {
+  color: #b4654d;
+}
+
+/* Inline code inside headings — inherit heading font size (Typora behavior) */
+.markdown-reading-view h1 code,
+.markdown-reading-view h2 code,
+.markdown-reading-view h3 code,
+.markdown-reading-view h4 code,
+.markdown-reading-view h5 code,
+.markdown-reading-view h6 code,
+.markdown-preview-view h1 code,
+.markdown-preview-view h2 code,
+.markdown-preview-view h3 code,
+.markdown-preview-view h4 code,
+.markdown-preview-view h5 code,
+.markdown-preview-view h6 code,
+.markdown-rendered h1 code,
+.markdown-rendered h2 code,
+.markdown-rendered h3 code,
+.markdown-rendered h4 code,
+.markdown-rendered h5 code,
+.markdown-rendered h6 code,
+.cm-header-1 .cm-inline-code,
+.cm-header-2 .cm-inline-code,
+.cm-header-3 .cm-inline-code,
+.cm-header-4 .cm-inline-code,
+.cm-header-5 .cm-inline-code,
+.cm-header-6 .cm-inline-code {
+  font-size: inherit;
+}
+
+/* <tt> element — Typora styles it identically to <code> */
+.markdown-reading-view tt,
+.markdown-preview-view tt,
+.markdown-rendered tt {
+  background-color: #f3f4f4;
+  border: 1px solid #e7eaed;
+  border-radius: 3px;
+  padding: 2px 4px 0px 4px;
+  font-size: 0.9em;
+  color: #333333;
+  font-family: var(--font-monospace);
+}
+
+/* -----------------------------------------------------------------------------
+   8. Tables
+   ----------------------------------------------------------------------------- */
+.markdown-reading-view table,
+.markdown-preview-view table,
+.markdown-rendered table {
+  border: 1px solid #dfe2e5;
+  border-collapse: collapse;
+  word-break: initial;
+  margin: 0.8em 0;
+}
+
+.markdown-reading-view thead,
+.markdown-preview-view thead,
+.markdown-rendered thead {
+  background-color: #f8f8f8;
+}
+
+/* Table rows — Typora adds border around each row */
+.markdown-reading-view tr,
+.markdown-preview-view tr,
+.markdown-rendered tr {
+  border: 1px solid #dfe2e5;
+}
+
+.markdown-reading-view tr:nth-child(even),
+.markdown-preview-view tr:nth-child(even),
+.markdown-rendered tr:nth-child(even) {
+  background-color: #f8f8f8;
+}
+
+.markdown-reading-view th,
+.markdown-preview-view th,
+.markdown-rendered th {
+  font-weight: 700;
+  border: 1px solid #dfe2e5;
+  border-bottom: 0;
+  padding: 6px 13px;
+  text-align: left;
+}
+
+.markdown-reading-view td,
+.markdown-preview-view td,
+.markdown-rendered td {
+  border: 1px solid #dfe2e5;
+  padding: 6px 13px;
+}
+
+/* Editor table widget */
+.cm-s-obsidian .cm-table-widget {
+  border: 1px solid #dfe2e5;
+}
+
+/* -----------------------------------------------------------------------------
+   9. Links
+   ----------------------------------------------------------------------------- */
+.markdown-reading-view a,
+.markdown-preview-view a,
+.markdown-rendered a {
+  color: #4183c4;
+  text-decoration: none;
+}
+
+.markdown-reading-view a:hover,
+.markdown-preview-view a:hover,
+.markdown-rendered a:hover {
+  color: #3772a5;
+  text-decoration: underline;
+}
+
+.cm-s-obsidian span.cm-url,
+.cm-s-obsidian span.cm-link,
+.cm-s-obsidian span.cm-hmd-internal-link {
+  color: #4183c4 !important;
+}
+
+.cm-s-obsidian span.cm-formatting-link {
+  color: #999999 !important;
+}
+
+/* -----------------------------------------------------------------------------
+   10. Horizontal Rule
+   ----------------------------------------------------------------------------- */
+.markdown-reading-view hr,
+.markdown-preview-view hr,
+.markdown-rendered hr {
+  height: 2px;
+  padding: 0;
+  margin: 16px 0;
+  background-color: #e7e7e7;
+  border: 0 none;
+  overflow: hidden;
+  box-sizing: content-box;
+}
+
+/* -----------------------------------------------------------------------------
+   11. Task Lists / Checkboxes
+   ----------------------------------------------------------------------------- */
+.markdown-reading-view .task-list-item-checkbox,
+.markdown-preview-view .task-list-item-checkbox {
+  margin-left: -1.3em;
+  border: 1px solid #c0c0c0;
+  border-radius: 2px;
+}
+
+.markdown-reading-view ul > li.task-list-item .task-list-item-checkbox,
+.markdown-preview-view ul > li.task-list-item .task-list-item-checkbox {
+  margin-left: -1.3em;
+}
+
+/* Editor task checkboxes */
+.HyperMD-task-line .task-list-item-checkbox {
+  margin-left: -1.3em;
+}
+
+/* -----------------------------------------------------------------------------
+   12. Tags
+   ----------------------------------------------------------------------------- */
+.markdown-reading-view .tag,
+.markdown-preview-view .tag,
+.markdown-rendered .tag {
+  color: #a7a7a7;
+  opacity: 1;
+}
+
+.cm-s-obsidian span.cm-hashtag {
+  color: #a7a7a7 !important;
+}
+
+.cm-s-obsidian span.cm-hashtag-begin,
+.cm-s-obsidian span.cm-hashtag-end {
+  color: #a7a7a7 !important;
+}
+
+/* -----------------------------------------------------------------------------
+   13. Images
+   ----------------------------------------------------------------------------- */
+
+/* Image embed container — spacing only, don't force block (breaks inline text) */
+.markdown-reading-view .image-embed,
+.markdown-preview-view .image-embed,
+.markdown-rendered .image-embed {
+  margin: 0.8em 0;
+  text-align: center;
+}
+
+/* All images: centered block, max-width preserved */
+.markdown-reading-view img,
+.markdown-preview-view img,
+.markdown-rendered img,
+.markdown-reading-view .image-embed img,
+.markdown-preview-view .image-embed img,
+.markdown-rendered .image-embed img {
+  display: block !important;
+  margin-left: auto !important;
+  margin-right: auto !important;
+  max-width: 100%;
+}
+
+/* -----------------------------------------------------------------------------
+   14. UI Chrome — Sidebar & Panels
+   ----------------------------------------------------------------------------- */
+.theme-light .mod-left-split,
+.theme-light .mod-right-split {
+  background-color: #fafafa;
+}
+
+.theme-light .workspace-tabs {
+  background-color: #fafafa;
+}
+
+.theme-light .workspace-ribbon {
+  background-color: #fafafa;
+}
+
+.theme-light .nav-file-title:hover,
+.theme-light .nav-folder-title:hover {
+  background-color: #f0f0f0;
+}
+
+.theme-light .nav-file-title.is-active {
+  background-color: #e8e8e8;
+}
+
+.theme-light .tree-item-self:hover {
+  background-color: #f0f0f0;
+}
+
+.theme-light .tree-item-self.is-active {
+  background-color: #e8e8e8;
+}
+
+/* Sidebar tabs */
+.theme-light .workspace-tab-header-container {
+  background-color: #fafafa;
+}
+
+.theme-light .workspace-tab-header.is-active {
+  background-color: #ffffff;
+}
+
+/* Title bar */
+.theme-light .view-header {
+  background-color: #ffffff;
+  border-bottom: 1px solid #e5e5e5;
+}
+
+/* Status bar */
+.theme-light .status-bar {
+  background-color: #fafafa;
+  border-top: 1px solid #e5e5e5;
+}
+
+/* -----------------------------------------------------------------------------
+   15. Strong / Bold / Italic
+   ----------------------------------------------------------------------------- */
+.markdown-reading-view strong,
+.markdown-preview-view strong,
+.markdown-rendered strong {
+  font-weight: 700;
+  color: inherit;
+}
+
+.markdown-reading-view em,
+.markdown-preview-view em,
+.markdown-rendered em {
+  font-style: italic;
+}
+
+/* -----------------------------------------------------------------------------
+   16. Frontmatter
+   ----------------------------------------------------------------------------- */
+.markdown-reading-view .frontmatter-container,
+.markdown-preview-view .frontmatter-container {
+  background-color: #f7f7f7;
+  border: none;
+  border-radius: 3px;
+  padding: 1rem;
+  color: #777777;
+  font-size: 85%;
+  line-height: 1.45;
+}
+
+.cm-s-obsidian .cm-hmd-frontmatter {
+  color: #777777;
+  font-size: 85%;
+  line-height: 1.45;
+}
+
+/* -----------------------------------------------------------------------------
+   17. Embeds / Transclusions
+   ----------------------------------------------------------------------------- */
+.markdown-reading-view .markdown-embed,
+.markdown-preview-view .markdown-embed {
+  border: 1px solid #e5e5e5;
+  border-radius: 3px;
+}
+
+.markdown-reading-view .markdown-embed-title,
+.markdown-preview-view .markdown-embed-title {
+  color: #777777;
+}
+
+/* -----------------------------------------------------------------------------
+   18. Callouts (Obsidian specific — GitHub style)
+   ----------------------------------------------------------------------------- */
+.markdown-reading-view .callout,
+.markdown-preview-view .callout {
+  border-left: 4px solid #dfe2e5;
+  border-radius: 3px;
+  background-color: #f8f8f8;
+  padding: 12px 15px;
+}
+
+/* Live Preview — callout editor blocks */
+.markdown-source-view.mod-cm6 .cm-embed-block.cm-callout > .callout {
+  border-left: 4px solid #dfe2e5;
+  border-radius: 3px;
+  background-color: #f8f8f8;
+  padding: 12px 15px;
+}
+
+/* -----------------------------------------------------------------------------
+   19. Live Preview / Editor Mode — Content Parity
+   All rules below bring the editing view in sync with the reading view for
+   paragraphs, lists, tables, images, HR, embeds, bold/italic, and more.
+   ----------------------------------------------------------------------------- */
+
+/* ---- 19a. Paragraphs & block-level spacing in editor ----
+   Typora uses pure line-height for within-paragraph spacing
+   and block-level margins for between-paragraph gaps.
+   We must NOT add padding to every line — that bloats vertical spacing. */
+.markdown-source-view.mod-cm6 .cm-line {
+  margin-top: 0;
+  margin-bottom: 0;
+  padding-top: 0;
+  padding-bottom: 0;
+}
+
+/* ---- 19b. List indentation in editor ---- */
+.markdown-source-view.mod-cm6 .HyperMD-list-line {
+  padding-left: 30px;
+}
+
+/* ---- 19c. List item paragraphs (tighter spacing) ----
+   Also removed per-line padding; line-height handles spacing. */
+
+/* ---- 19d. Tables in editor — full GitHub style ---- */
+/* Editor table thead background */
+.markdown-source-view.mod-cm6 .cm-table-widget thead {
+  background-color: #f8f8f8;
+}
+/* Editor table even row striping */
+.markdown-source-view.mod-cm6 .cm-table-widget tr:nth-child(even) {
+  background-color: #f8f8f8;
+}
+/* Editor table row borders */
+.markdown-source-view.mod-cm6 .cm-table-widget tr {
+  border: 1px solid #dfe2e5;
+}
+/* Editor table header cells */
+.markdown-source-view.mod-cm6 .cm-table-widget th {
+  font-weight: 700;
+  border: 1px solid #dfe2e5;
+  border-bottom: 0;
+  padding: 6px 13px;
+  text-align: left;
+}
+/* Editor table data cells */
+.markdown-source-view.mod-cm6 .cm-table-widget td {
+  border: 1px solid #dfe2e5;
+  padding: 6px 13px;
+}
+
+/* ---- 19e. Horizontal rules in editor ---- */
+.markdown-source-view.mod-cm6 hr,
+.markdown-source-view.mod-cm6 .cm-line hr {
+  height: 2px;
+  padding: 0;
+  margin: 16px 0;
+  background-color: #e7e7e7;
+  border: 0 none;
+  overflow: hidden;
+  box-sizing: content-box;
+}
+
+/* ---- 19f. Images in editor — block-level, centered (Typora behavior) ---- */
+/* wikilink embeds: ![[image.png]] */
+.markdown-source-view.mod-cm6 .image-embed {
+  display: block !important;
+  width: fit-content;
+  max-width: 100%;
+  margin: 0.8em auto;
+}
+.markdown-source-view.mod-cm6 .image-embed img {
+  display: block;
+  max-width: 100%;
+  margin: 0 auto;
+}
+
+/* standard Markdown images: ![](url)
+   In Live Preview, images are wrapped in .internal-embed.media-embed.image-embed
+   Center the entire embed container */
+.markdown-source-view.mod-cm6 .internal-embed.media-embed.image-embed {
+  display: block !important;
+  margin: 0.8em auto !important;
+  width: fit-content;
+  max-width: 100%;
+}
+
+.markdown-source-view.mod-cm6
+  .internal-embed.media-embed.image-embed
+  .image-wrapper {
+  display: block !important;
+  margin: 0 auto !important;
+}
+
+.markdown-source-view.mod-cm6 .internal-embed.media-embed.image-embed img {
+  display: block;
+  max-width: 100%;
+}
+
+/* ---- 19g. Bold / strong in editor ---- */
+.markdown-source-view.mod-cm6 .cm-strong {
+  font-weight: 700;
+  color: inherit;
+}
+
+/* ---- 19h. Italic / em in editor ---- */
+.markdown-source-view.mod-cm6 .cm-em {
+  font-style: italic;
+}
+
+/* ---- 19i. Embeds / transclusions in editor ---- */
+.markdown-source-view.mod-cm6 .markdown-embed {
+  border: 1px solid #e5e5e5;
+  border-radius: 3px;
+}
+.markdown-source-view.mod-cm6 .markdown-embed-title {
+  color: #777777;
+}
+
+/* ---- 19j. Mark / highlight in editor ---- */
+.markdown-source-view.mod-cm6 .cm-highlight {
+  background: #ff0;
+  color: #000;
+}
+
+/* ---- 19k. Suppress Obsidian's double h1/h2 underline in editor ---- */
+.markdown-source-view.mod-cm6 .cm-header-1,
+.markdown-source-view.mod-cm6 .cm-header-2 {
+  --h1-underline: none;
+  --h2-underline: none;
+}
+
+/* ---- 19l. Task list checkbox alignment in editor ---- */
+.markdown-source-view.mod-cm6 .HyperMD-task-line .task-list-item-checkbox {
+  margin-left: -1.3em;
+  border: 1px solid #c0c0c0;
+  border-radius: 2px;
+}
+
+/* ---- 19m. Tags in editor (reinforce) ---- */
+.markdown-source-view.mod-cm6 .cm-hashtag.cm-hashtag-begin,
+.markdown-source-view.mod-cm6 .cm-hashtag.cm-hashtag-end {
+  color: #a7a7a7;
+  opacity: 1;
+}
+
+/* -----------------------------------------------------------------------------
+   19. Caret / Cursor color (macOS accent)
+   ----------------------------------------------------------------------------- */
+.markdown-source-view.mod-cm6 .cm-content {
+  caret-color: AccentColor;
+}
+
+/* -----------------------------------------------------------------------------
+   20. Misc — Scrollbar, Search, etc.
+   ----------------------------------------------------------------------------- */
+.theme-light ::-webkit-scrollbar-thumb {
+  background-color: #c0c0c0;
+}
+
+.theme-light ::-webkit-scrollbar-thumb:hover {
+  background-color: #a0a0a0;
+}
+
+/* -----------------------------------------------------------------------------
+   21. Title Centering
+   ----------------------------------------------------------------------------- */
+
+/* Inline title (the big title inside the document) */
+.inline-title {
+  text-align: center !important;
+  margin-left: auto !important;
+  margin-right: auto !important;
+}
+
+/* Pane header title bar */
+.view-header-title {
+  text-align: center !important;
+}
+
+/* -----------------------------------------------------------------------------
+   22. Settings / Modal Dialogs — Typora-Style
+   Matches Typora's preferences panel and modal dialog visual style.
+   ----------------------------------------------------------------------------- */
+
+/* ---- 22a. Modal overlay / backdrop ---- */
+.modal-bg {
+  background: rgba(0, 0, 0, 0.08) !important;
+  opacity: 1 !important;
+}
+
+/* ---- 22b. Modal dialog box ---- */
+.modal {
+  background: #ffffff;
+  border: 1px solid #c1c9d0;
+  border-radius: 0.5em;
+  box-shadow: 0 0 20px rgba(108, 117, 125, 0.41);
+  padding: 1.5rem;
+}
+
+.modal-title {
+  font-size: 1.15em;
+  font-weight: 700;
+}
+
+.modal-close-button {
+  color: #777777;
+  top: 7px;
+  right: 7px;
+}
+
+.modal-close-button:hover {
+  color: #333333;
+  background: #f0f0f0;
+  border-radius: 4px;
+}
+
+/* ---- 22c. Modal buttons ---- */
+.modal button,
+.modal-button-container button {
+  padding: 2px 16px;
+  border-radius: 4px;
+  font-size: 13px;
+}
+
+.modal button.mod-cta {
+  background-color: #1a82fb;
+  border-color: transparent;
+  color: #ffffff;
+}
+
+.modal button.mod-cta:hover {
+  background-color: rgba(26, 130, 251, 0.9);
+  border-color: transparent;
+}
+
+.modal button:not(.mod-cta):not(.mod-warning) {
+  background-color: #ffffff;
+  border: 1px solid #d0d0d0;
+  color: #333333;
+}
+
+.modal button:not(.mod-cta):not(.mod-warning):hover {
+  background-color: #f0f0f0;
+}
+
+.modal button:disabled {
+  background: #9e9e9e;
+  opacity: 0.5;
+  cursor: not-allowed;
+  border-color: #9e9e9e;
+  box-shadow: none;
+}
+
+.modal button.mod-warning {
+  background-color: transparent;
+  color: #d32f2f;
+}
+
+/* ---- 22d. Settings panel — sidebar (left nav) ---- */
+.modal.mod-settings .vertical-tab-header {
+  background-color: #f5f5f4;
+  border-right: 1px solid #ddd;
+  padding-top: 18px;
+}
+
+.modal.mod-settings .vertical-tab-header-group-title {
+  font-size: 11px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: #888888;
+  padding: 8px 16px 4px;
+}
+
+.modal.mod-settings .vertical-tab-nav-item {
+  font-size: 13px;
+  color: #333333;
+  padding: 6px 16px;
+  margin: 0 8px;
+  border-radius: 6px;
+  border: none;
+}
+
+.modal.mod-settings .vertical-tab-nav-item:hover {
+  background-color: rgba(229, 229, 229, 0.59);
+  color: #333333;
+}
+
+.modal.mod-settings .vertical-tab-nav-item.is-active {
+  background-color: #e5e5e5;
+  color: #333333;
+  font-weight: 600;
+}
+
+/* ---- 22e. Settings panel — content area (right side) ---- */
+.modal.mod-settings .vertical-tab-content-container {
+  background-color: #ffffff;
+  padding-top: 16px;
+}
+
+.modal.mod-settings .vertical-tab-content {
+  padding: 0 24px;
+}
+
+/* ---- 22f. Settings — individual setting rows ---- */
+.setting-item {
+  border-top: none;
+  padding: 12px 0;
+}
+
+.setting-item-name {
+  font-size: 14px;
+  font-weight: 500;
+  color: #333333;
+}
+
+.setting-item-description {
+  font-size: 12px;
+  color: #888888;
+  line-height: 1.4;
+}
+
+.setting-item-heading {
+  margin-top: 18px;
+  margin-bottom: 8px;
+}
+
+.setting-item-heading .setting-item-name {
+  font-size: 13px;
+  font-weight: 700;
+  color: #555555;
+}
+
+/* ---- 22g. Form inputs (text, search, select, number) ---- */
+.setting-item input[type="text"],
+.setting-item input[type="search"],
+.setting-item input[type="number"],
+.setting-item input[type="password"],
+.setting-item select,
+.setting-item textarea,
+.modal input[type="text"],
+.modal input[type="search"],
+.modal input[type="number"],
+.modal select,
+.search-input-container input {
+  border: 1px solid #d0d0d0;
+  border-radius: 4px;
+  background: #ffffff;
+  color: #333333;
+  font-size: 13px;
+  padding: 4px 10px 4px 28px;
+}
+
+.setting-item input:focus,
+.modal input:focus,
+.search-input-container input:focus {
+  border-color: #6eace2;
+  box-shadow: 0 0 0 2px rgba(110, 172, 226, 0.3);
+  outline: none;
+}
+
+/* ---- 22h. Toggle switches ---- */
+.checkbox-container {
+  background-color: #d0d0d0;
+  border: none;
+  box-shadow: inset 0 0 1px rgba(0, 0, 0, 0.15);
+  width: 40px;
+  height: 22px;
+  border-radius: 26px;
+}
+
+.checkbox-container.is-enabled {
+  background-color: #1a82fb;
+}
+
+.checkbox-container:after {
+  background: #ffffff;
+  border: none;
+  height: 18px;
+  width: 18px;
+  border-radius: 50%;
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.2);
+}
+
+/* ---- 22i. Dropdowns / Selects ---- */
+select,
+.dropdown {
+  border: 1px solid #d0d0d0;
+  border-radius: 4px;
+  background: #ffffff;
+  color: #333333;
+  font-size: 13px;
+}
+
+select:hover,
+.dropdown:hover {
+  border-color: #b0b0b0;
+  background-color: #fafafa;
+}
+
+/* ---- 22j. Plugin / Theme lists ---- */
+.community-theme.is-selected,
+.community-plugin.is-selected {
+  background-color: #f0f0f0;
+}
+
+.community-theme:hover,
+.community-plugin:hover {
+  background-color: #f5f5f5;
+}
+
+/* ---- 22k. Hotkey input ---- */
+.setting-hotkey {
+  background-color: #f5f5f5;
+  border: 1px solid #d0d0d0;
+  border-radius: 4px;
+  padding: 4px 10px;
+  font-size: 13px;
+  font-family: var(--font-monospace);
+}
+
+/* ---- 22l. Prompt / Command palette ---- */
+.prompt,
+.suggestion-container {
+  background: #ffffff;
+  border: 1px solid #c1c9d0;
+  border-radius: 0.5em;
+  box-shadow: 0 0 20px rgba(108, 117, 125, 0.41);
+}
+
+.prompt-input-container input,
+.suggestion-container input {
+  border: none;
+  background: transparent;
+  font-size: 14px;
+}
+
+.suggestion-item {
+  padding: 6px 16px;
+  font-size: 13px;
+}
+
+.suggestion-item.is-selected {
+  background-color: rgba(229, 229, 229, 0.59);
+  color: #333333;
+}
+
+.suggestion-item:hover {
+  background-color: #f0f0f0;
+}
+
+/* ---- 22m. Scrollbar in settings ---- */
+.modal ::-webkit-scrollbar {
+  display: none;
+}
+
+/* =============================================================================
+   Performance Optimization — Disable Unnecessary Visual Effects
+   ============================================================================= */
+
+/* 禁用对话框的过渡动画 */
+.modal {
+  animation: none !important;
+  transition: none !important;
+}
+
+/* 禁用下拉菜单的动画 */
+.menu {
+  animation: none !important;
+  transition: none !important;
+}
+
+/* 禁用弹出菜单的动画 */
+.popover {
+  animation: none !important;
+  transition: none !important;
+  backdrop-filter: none !important;
+  -webkit-backdrop-filter: none !important;
+}
+
+/* 禁用对话框打开/关闭动画 */
+.modal.is-active {
+  animation: none !important;
+}
+
+/* 禁用某些悬停效果的过渡（但保留颜色变化） */
+.clickable-icon {
+  transition: none !important;
+}
+
+/* 禁用滚动条的过渡效果 */
+::-webkit-scrollbar-thumb {
+  transition: none !important;
+}
+
+/* 禁用侧边栏动画 */
+.sidebar-container {
+  animation: none !important;
+}

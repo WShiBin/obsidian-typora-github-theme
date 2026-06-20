@@ -1,10 +1,12 @@
 /* =============================================================================
    GitHub Theme for Obsidian — based on Typora's github.css
    Overlays on top of your existing Obsidian theme, matching Typora's GitHub look.
+   Supports system-level light/dark mode detection
    ============================================================================= */
 
 /* -----------------------------------------------------------------------------
    1. CSS Variables — UI Colors & Typography Foundation
+   LIGHT MODE
    ----------------------------------------------------------------------------- */
 .theme-light {
   /* Backgrounds */
@@ -88,6 +90,89 @@
   --side-bar-bg-color: #fafafa;
 }
 
+/* DARK MODE — GitHub Dark Theme Colors */
+.theme-dark {
+  /* Backgrounds — GitHub dark: #0d1117, #161b22 */
+  --background-primary: #0d1117;
+  --background-secondary: #161b22;
+  --background-primary-alt: #161b22;
+  --background-secondary-alt: #21262d;
+  --background-tertiary: #21262d;
+  --background-modifier-border: #30363d;
+  --background-modifier-border-hover: #404854;
+  --background-modifier-border-focus: #505860;
+  --background-modifier-form-field: #0d1117;
+
+  /* Code backgrounds */
+  --code-background: #161b22;
+  --code-normal: #e6edf3;
+
+  /* Text — GitHub dark text: #e6edf3, muted: #8b949e */
+  --text-normal: #e6edf3;
+  --text-muted: #8b949e;
+  --text-faint: #6e7681;
+  --text-accent: #79c0ff;
+  --text-accent-hover: #58a6ff;
+
+  /* Paragraph & heading spacing */
+  --p-spacing: 0.8em;
+  --heading-spacing: 1rem;
+
+  /* Links — GitHub dark blue: #79c0ff */
+  --link-color: #79c0ff;
+  --link-color-hover: #58a6ff;
+  --link-external-color: #79c0ff;
+  --link-external-color-hover: #58a6ff;
+
+  /* Blockquote */
+  --blockquote-border-color: #30363d;
+  --blockquote-border-thickness: 4px;
+  --blockquote-color: #8b949e;
+  --blockquote-background-color: transparent;
+  --blockquote-font-style: normal;
+
+  /* Tables */
+  --table-border-color: #30363d;
+  --table-header-background: #161b22;
+  --table-header-background-hover: #21262d;
+  --table-row-background-hover: #161b22;
+  --table-row-alt-background: #161b22;
+  --table-column-alt-background: #161b22;
+
+  /* Tags */
+  --tag-color: #8b949e;
+  --tag-background: transparent;
+
+  /* HR */
+  --hr-color: #30363d;
+  --hr-thickness: 2px;
+
+  /* Checkboxes */
+  --checkbox-color: #8b949e;
+  --checkbox-color-hover: #a0a8b8;
+  --checkbox-border-color: #404854;
+
+  /* Interactive */
+  --interactive-accent: #79c0ff;
+  --interactive-accent-hover: #58a6ff;
+
+  /* Scrollbar */
+  --scrollbar-bg: transparent;
+  --scrollbar-thumb-bg: #404854;
+  --scrollbar-active-thumb-bg: #505860;
+
+  /* File navigator */
+  --nav-item-color: #e6edf3;
+  --nav-item-color-hover: #e6edf3;
+  --nav-item-color-active: #e6edf3;
+  --nav-item-background-hover: #21262d;
+  --nav-item-background-active: #30363d;
+  --nav-collapse-icon-color: #6e7681;
+
+  /* Sidebar */
+  --side-bar-bg-color: #161b22;
+}
+
 /* -----------------------------------------------------------------------------
    2. Font & Base Typography
    ----------------------------------------------------------------------------- */
@@ -139,6 +224,16 @@ body {
   --h6-color: #777777;
 }
 
+/* Dark mode heading colors */
+.theme-dark {
+  --h1-color: #e6edf3;
+  --h2-color: #e6edf3;
+  --h3-color: #e6edf3;
+  --h4-color: #e6edf3;
+  --h5-color: #e6edf3;
+  --h6-color: #8b949e;
+}
+
 /* Body base */
 .markdown-source-view,
 .markdown-reading-view {
@@ -149,7 +244,7 @@ body {
   -webkit-font-smoothing: antialiased;
 }
 
-/* Ensure all editor/view content surfaces use the same white background */
+/* Ensure all editor/view content surfaces use the correct theme background */
 .markdown-source-view .cm-editor,
 .markdown-source-view .cm-scroller,
 .markdown-source-view .cm-content,
@@ -159,7 +254,7 @@ body {
 .workspace-leaf-content .view-content,
 .workspace-leaf-content[data-type="markdown"],
 .workspace-leaf-content[data-type="empty"] {
-  background-color: #ffffff !important;
+  background-color: var(--background-primary) !important;
 }
 
 /* Explicit line-height on editor lines and preview paragraphs
@@ -179,20 +274,30 @@ body {
   line-height: 1.42857143;
 }
 
-/* Selection highlight — Typora uses light blue #B5D6FC */
-::selection {
+/* Selection highlight — Typora uses light blue #B5D6FC for light mode, darker blue for dark mode */
+.theme-light ::selection {
   background-color: #b5d6fc;
   color: inherit;
 }
 
+.theme-dark ::selection {
+  background-color: #388bfd;
+  color: #e6edf3;
+}
+
 /* Mark/highlight — Typora uses yellow bg with black text */
-mark {
+.theme-light mark {
   background: #ff0;
   color: #000;
 }
 
+.theme-dark mark {
+  background: #d29922;
+  color: #0d1117;
+}
+
 /* Keyboard <kbd> — Typora's realistic keycap look */
-kbd {
+.theme-light kbd {
   margin: 0 0.1em;
   padding: 0.1em 0.6em;
   font-size: 0.8em;
@@ -203,6 +308,22 @@ kbd {
   box-shadow:
     0 1px 0 rgba(12, 13, 14, 0.2),
     0 0 0 2px #fff inset;
+  white-space: nowrap;
+  vertical-align: middle;
+  font-family: var(--font-monospace);
+}
+
+.theme-dark kbd {
+  margin: 0 0.1em;
+  padding: 0.1em 0.6em;
+  font-size: 0.8em;
+  color: #e6edf3;
+  background: #21262d;
+  border: 1px solid #30363d;
+  border-radius: 3px;
+  box-shadow:
+    0 1px 0 rgba(0, 0, 0, 0.4),
+    0 0 0 2px #161b22 inset;
   white-space: nowrap;
   vertical-align: middle;
   font-family: var(--font-monospace);
@@ -324,7 +445,7 @@ body {
   margin-top: 1rem;
   margin-bottom: 1rem;
   padding-bottom: 0.3em;
-  border-bottom: 1px solid #eee;
+  border-bottom: 1px solid var(--background-modifier-border);
 }
 
 .markdown-reading-view h2,
@@ -338,7 +459,7 @@ body {
   margin-top: 1rem;
   margin-bottom: 1rem;
   padding-bottom: 0.3em;
-  border-bottom: 1px solid #eee;
+  border-bottom: 1px solid var(--background-modifier-border);
 }
 
 .markdown-reading-view h3,
@@ -489,9 +610,9 @@ body {
 .markdown-reading-view blockquote,
 .markdown-preview-view blockquote,
 .markdown-rendered blockquote {
-  border-left: 4px solid #dfe2e5;
+  border-left: 4px solid var(--blockquote-border-color);
   padding: 0 15px;
-  color: #777777;
+  color: var(--blockquote-color);
   margin: 0.8em 0;
 }
 
@@ -503,13 +624,13 @@ body {
 
 /* Editor mode blockquote lines */
 .HyperMD-quote {
-  border-left: 4px solid #dfe2e5 !important;
+  border-left: 4px solid var(--blockquote-border-color) !important;
   padding-left: 15px !important;
-  color: #777777 !important;
+  color: var(--blockquote-color) !important;
 }
 
 .HyperMD-quote.HyperMD-quote-2 {
-  border-left: 4px solid #dfe2e5 !important;
+  border-left: 4px solid var(--blockquote-border-color) !important;
 }
 
 /* -----------------------------------------------------------------------------
@@ -520,21 +641,21 @@ body {
 .markdown-reading-view code:not(pre code),
 .markdown-preview-view code:not(pre code),
 .markdown-rendered code:not(pre code) {
-  background-color: #f3f4f4;
-  border: 1px solid #e7eaed;
+  background-color: var(--code-background);
+  border: 1px solid var(--background-modifier-border);
   border-radius: 3px;
   padding: 2px 4px 0px 4px;
   font-size: 0.9em;
-  color: #333333;
+  color: var(--code-normal);
 }
 
 .cm-inline-code {
-  background-color: #f3f4f4 !important;
-  border: 1px solid #e7eaed;
+  background-color: var(--code-background) !important;
+  border: 1px solid var(--background-modifier-border);
   border-radius: 3px;
   padding: 2px 4px 0px 4px;
   font-size: 0.9em !important;
-  color: #333333 !important;
+  color: var(--code-normal) !important;
 }
 
 /* Code blocks */
@@ -542,8 +663,8 @@ body {
 .markdown-preview-view pre,
 .markdown-rendered pre,
 .HyperMD-codeblock {
-  background-color: #f8f8f8 !important;
-  border: 1px solid #e7eaed;
+  background-color: var(--code-background) !important;
+  border: 1px solid var(--background-modifier-border);
   border-radius: 3px;
   padding: 8px 12px 6px 12px;
   font-size: 0.9em;
@@ -551,20 +672,20 @@ body {
 
 /* Code block lines in editor */
 .cm-s-obsidian .HyperMD-codeblock {
-  background-color: #f8f8f8 !important;
-  border-left: 1px solid #e7eaed;
-  border-right: 1px solid #e7eaed;
+  background-color: var(--code-background) !important;
+  border-left: 1px solid var(--background-modifier-border);
+  border-right: 1px solid var(--background-modifier-border);
 }
 
 .cm-s-obsidian .HyperMD-codeblock-begin {
-  border-top: 1px solid #e7eaed;
+  border-top: 1px solid var(--background-modifier-border);
   border-top-left-radius: 3px;
   border-top-right-radius: 3px;
   padding-top: 8px !important;
 }
 
 .cm-s-obsidian .HyperMD-codeblock-end {
-  border-bottom: 1px solid #e7eaed;
+  border-bottom: 1px solid var(--background-modifier-border);
   border-bottom-left-radius: 3px;
   border-bottom-right-radius: 3px;
   padding-bottom: 6px !important;
@@ -583,7 +704,7 @@ body {
 /* Language tag */
 .cm-s-obsidian span.cm-formatting-code-block ~ span.cm-lang,
 .markdown-rendered .code-block-flair {
-  color: #b4654d;
+  color: var(--text-muted);
 }
 
 /* Inline code inside headings — inherit heading font size (Typora behavior) */
@@ -618,12 +739,12 @@ body {
 .markdown-reading-view tt,
 .markdown-preview-view tt,
 .markdown-rendered tt {
-  background-color: #f3f4f4;
-  border: 1px solid #e7eaed;
+  background-color: var(--code-background);
+  border: 1px solid var(--background-modifier-border);
   border-radius: 3px;
   padding: 2px 4px 0px 4px;
   font-size: 0.9em;
-  color: #333333;
+  color: var(--code-normal);
   font-family: var(--font-monospace);
 }
 
@@ -633,7 +754,7 @@ body {
 .markdown-reading-view table,
 .markdown-preview-view table,
 .markdown-rendered table {
-  border: 1px solid #dfe2e5;
+  border: 1px solid var(--table-border-color);
   border-collapse: collapse;
   word-break: initial;
   margin: 0.8em 0;
@@ -642,27 +763,27 @@ body {
 .markdown-reading-view thead,
 .markdown-preview-view thead,
 .markdown-rendered thead {
-  background-color: #f8f8f8;
+  background-color: var(--table-header-background);
 }
 
 /* Table rows — Typora adds border around each row */
 .markdown-reading-view tr,
 .markdown-preview-view tr,
 .markdown-rendered tr {
-  border: 1px solid #dfe2e5;
+  border: 1px solid var(--table-border-color);
 }
 
 .markdown-reading-view tr:nth-child(even),
 .markdown-preview-view tr:nth-child(even),
 .markdown-rendered tr:nth-child(even) {
-  background-color: #f8f8f8;
+  background-color: var(--table-row-alt-background);
 }
 
 .markdown-reading-view th,
 .markdown-preview-view th,
 .markdown-rendered th {
   font-weight: 700;
-  border: 1px solid #dfe2e5;
+  border: 1px solid var(--table-border-color);
   border-bottom: 0;
   padding: 6px 13px;
   text-align: left;
@@ -671,13 +792,13 @@ body {
 .markdown-reading-view td,
 .markdown-preview-view td,
 .markdown-rendered td {
-  border: 1px solid #dfe2e5;
+  border: 1px solid var(--table-border-color);
   padding: 6px 13px;
 }
 
 /* Editor table widget */
 .cm-s-obsidian .cm-table-widget {
-  border: 1px solid #dfe2e5;
+  border: 1px solid var(--table-border-color);
 }
 
 /* -----------------------------------------------------------------------------
@@ -686,25 +807,25 @@ body {
 .markdown-reading-view a,
 .markdown-preview-view a,
 .markdown-rendered a {
-  color: #4183c4;
+  color: var(--link-color);
   text-decoration: none;
 }
 
 .markdown-reading-view a:hover,
 .markdown-preview-view a:hover,
 .markdown-rendered a:hover {
-  color: #3772a5;
+  color: var(--link-color-hover);
   text-decoration: underline;
 }
 
 .cm-s-obsidian span.cm-url,
 .cm-s-obsidian span.cm-link,
 .cm-s-obsidian span.cm-hmd-internal-link {
-  color: #4183c4 !important;
+  color: var(--link-color) !important;
 }
 
 .cm-s-obsidian span.cm-formatting-link {
-  color: #999999 !important;
+  color: var(--text-faint) !important;
 }
 
 /* -----------------------------------------------------------------------------
@@ -713,10 +834,10 @@ body {
 .markdown-reading-view hr,
 .markdown-preview-view hr,
 .markdown-rendered hr {
-  height: 2px;
+  height: var(--hr-thickness);
   padding: 0;
   margin: 16px 0;
-  background-color: #e7e7e7;
+  background-color: var(--hr-color);
   border: 0 none;
   overflow: hidden;
   box-sizing: content-box;
@@ -728,7 +849,7 @@ body {
 .markdown-reading-view .task-list-item-checkbox,
 .markdown-preview-view .task-list-item-checkbox {
   margin-left: -1.3em;
-  border: 1px solid #c0c0c0;
+  border: 1px solid var(--checkbox-border-color);
   border-radius: 2px;
 }
 
@@ -748,17 +869,17 @@ body {
 .markdown-reading-view .tag,
 .markdown-preview-view .tag,
 .markdown-rendered .tag {
-  color: #a7a7a7;
+  color: var(--tag-color);
   opacity: 1;
 }
 
 .cm-s-obsidian span.cm-hashtag {
-  color: #a7a7a7 !important;
+  color: var(--tag-color) !important;
 }
 
 .cm-s-obsidian span.cm-hashtag-begin,
 .cm-s-obsidian span.cm-hashtag-end {
-  color: #a7a7a7 !important;
+  color: var(--tag-color) !important;
 }
 
 /* -----------------------------------------------------------------------------
@@ -791,53 +912,102 @@ body {
    ----------------------------------------------------------------------------- */
 .theme-light .mod-left-split,
 .theme-light .mod-right-split {
-  background-color: #fafafa;
+  background-color: var(--side-bar-bg-color);
 }
 
 .theme-light .workspace-tabs {
-  background-color: #fafafa;
+  background-color: var(--side-bar-bg-color);
 }
 
 .theme-light .workspace-ribbon {
-  background-color: #fafafa;
+  background-color: var(--side-bar-bg-color);
 }
 
 .theme-light .nav-file-title:hover,
 .theme-light .nav-folder-title:hover {
-  background-color: #f0f0f0;
+  background-color: var(--nav-item-background-hover);
 }
 
 .theme-light .nav-file-title.is-active {
-  background-color: #e8e8e8;
+  background-color: var(--nav-item-background-active);
 }
 
 .theme-light .tree-item-self:hover {
-  background-color: #f0f0f0;
+  background-color: var(--nav-item-background-hover);
 }
 
 .theme-light .tree-item-self.is-active {
-  background-color: #e8e8e8;
+  background-color: var(--nav-item-background-active);
 }
 
 /* Sidebar tabs */
 .theme-light .workspace-tab-header-container {
-  background-color: #fafafa;
+  background-color: var(--side-bar-bg-color);
 }
 
 .theme-light .workspace-tab-header.is-active {
-  background-color: #ffffff;
+  background-color: var(--background-primary);
 }
 
 /* Title bar */
 .theme-light .view-header {
-  background-color: #ffffff;
-  border-bottom: 1px solid #e5e5e5;
+  background-color: var(--background-primary);
+  border-bottom: 1px solid var(--background-modifier-border);
 }
 
 /* Status bar */
 .theme-light .status-bar {
-  background-color: #fafafa;
-  border-top: 1px solid #e5e5e5;
+  background-color: var(--background-secondary);
+  border-top: 1px solid var(--background-modifier-border);
+}
+
+/* ----- Dark Chrome ----- */
+.theme-dark .mod-left-split,
+.theme-dark .mod-right-split {
+  background-color: var(--side-bar-bg-color);
+}
+
+.theme-dark .workspace-tabs {
+  background-color: var(--side-bar-bg-color);
+}
+
+.theme-dark .workspace-ribbon {
+  background-color: var(--side-bar-bg-color);
+}
+
+.theme-dark .nav-file-title:hover,
+.theme-dark .nav-folder-title:hover {
+  background-color: var(--nav-item-background-hover);
+}
+
+.theme-dark .nav-file-title.is-active {
+  background-color: var(--nav-item-background-active);
+}
+
+.theme-dark .tree-item-self:hover {
+  background-color: var(--nav-item-background-hover);
+}
+
+.theme-dark .tree-item-self.is-active {
+  background-color: var(--nav-item-background-active);
+}
+
+.theme-dark .workspace-tab-header-container {
+  background-color: var(--side-bar-bg-color);
+}
+
+.theme-dark .workspace-tab-header.is-active {
+  background-color: var(--background-primary);
+}
+
+.theme-dark .view-header {
+  background-color: var(--background-primary);
+  border-bottom: 1px solid var(--background-modifier-border);
+}
+
+.theme-dark .status-bar {
+  background-color: var(--background-secondary);
+  border-top: 1px solid var(--background-modifier-border);
 }
 
 /* -----------------------------------------------------------------------------
@@ -861,17 +1031,17 @@ body {
    ----------------------------------------------------------------------------- */
 .markdown-reading-view .frontmatter-container,
 .markdown-preview-view .frontmatter-container {
-  background-color: #f7f7f7;
+  background-color: var(--background-secondary);
   border: none;
   border-radius: 3px;
   padding: 1rem;
-  color: #777777;
+  color: var(--text-muted);
   font-size: 85%;
   line-height: 1.45;
 }
 
 .cm-s-obsidian .cm-hmd-frontmatter {
-  color: #777777;
+  color: var(--text-muted);
   font-size: 85%;
   line-height: 1.45;
 }
@@ -881,13 +1051,13 @@ body {
    ----------------------------------------------------------------------------- */
 .markdown-reading-view .markdown-embed,
 .markdown-preview-view .markdown-embed {
-  border: 1px solid #e5e5e5;
+  border: 1px solid var(--background-modifier-border);
   border-radius: 3px;
 }
 
 .markdown-reading-view .markdown-embed-title,
 .markdown-preview-view .markdown-embed-title {
-  color: #777777;
+  color: var(--text-muted);
 }
 
 /* -----------------------------------------------------------------------------
@@ -895,17 +1065,17 @@ body {
    ----------------------------------------------------------------------------- */
 .markdown-reading-view .callout,
 .markdown-preview-view .callout {
-  border-left: 4px solid #dfe2e5;
+  border-left: 4px solid var(--blockquote-border-color);
   border-radius: 3px;
-  background-color: #f8f8f8;
+  background-color: var(--code-background);
   padding: 12px 15px;
 }
 
 /* Live Preview — callout editor blocks */
 .markdown-source-view.mod-cm6 .cm-embed-block.cm-callout > .callout {
-  border-left: 4px solid #dfe2e5;
+  border-left: 4px solid var(--blockquote-border-color);
   border-radius: 3px;
-  background-color: #f8f8f8;
+  background-color: var(--code-background);
   padding: 12px 15px;
 }
 
@@ -937,37 +1107,37 @@ body {
 /* ---- 19d. Tables in editor — full GitHub style ---- */
 /* Editor table thead background */
 .markdown-source-view.mod-cm6 .cm-table-widget thead {
-  background-color: #f8f8f8;
+  background-color: var(--table-header-background);
 }
 /* Editor table even row striping */
 .markdown-source-view.mod-cm6 .cm-table-widget tr:nth-child(even) {
-  background-color: #f8f8f8;
+  background-color: var(--table-row-alt-background);
 }
 /* Editor table row borders */
 .markdown-source-view.mod-cm6 .cm-table-widget tr {
-  border: 1px solid #dfe2e5;
+  border: 1px solid var(--table-border-color);
 }
 /* Editor table header cells */
 .markdown-source-view.mod-cm6 .cm-table-widget th {
   font-weight: 700;
-  border: 1px solid #dfe2e5;
+  border: 1px solid var(--table-border-color);
   border-bottom: 0;
   padding: 6px 13px;
   text-align: left;
 }
 /* Editor table data cells */
 .markdown-source-view.mod-cm6 .cm-table-widget td {
-  border: 1px solid #dfe2e5;
+  border: 1px solid var(--table-border-color);
   padding: 6px 13px;
 }
 
 /* ---- 19e. Horizontal rules in editor ---- */
 .markdown-source-view.mod-cm6 hr,
 .markdown-source-view.mod-cm6 .cm-line hr {
-  height: 2px;
+  height: var(--hr-thickness);
   padding: 0;
   margin: 16px 0;
-  background-color: #e7e7e7;
+  background-color: var(--hr-color);
   border: 0 none;
   overflow: hidden;
   box-sizing: content-box;
@@ -1022,17 +1192,22 @@ body {
 
 /* ---- 19i. Embeds / transclusions in editor ---- */
 .markdown-source-view.mod-cm6 .markdown-embed {
-  border: 1px solid #e5e5e5;
+  border: 1px solid var(--background-modifier-border);
   border-radius: 3px;
 }
 .markdown-source-view.mod-cm6 .markdown-embed-title {
-  color: #777777;
+  color: var(--text-muted);
 }
 
 /* ---- 19j. Mark / highlight in editor ---- */
-.markdown-source-view.mod-cm6 .cm-highlight {
+.theme-light .markdown-source-view.mod-cm6 .cm-highlight {
   background: #ff0;
   color: #000;
+}
+
+.theme-dark .markdown-source-view.mod-cm6 .cm-highlight {
+  background: #d29922;
+  color: #0d1117;
 }
 
 /* ---- 19k. Suppress Obsidian's double h1/h2 underline in editor ---- */
@@ -1045,14 +1220,14 @@ body {
 /* ---- 19l. Task list checkbox alignment in editor ---- */
 .markdown-source-view.mod-cm6 .HyperMD-task-line .task-list-item-checkbox {
   margin-left: -1.3em;
-  border: 1px solid #c0c0c0;
+  border: 1px solid var(--checkbox-border-color);
   border-radius: 2px;
 }
 
 /* ---- 19m. Tags in editor (reinforce) ---- */
 .markdown-source-view.mod-cm6 .cm-hashtag.cm-hashtag-begin,
 .markdown-source-view.mod-cm6 .cm-hashtag.cm-hashtag-end {
-  color: #a7a7a7;
+  color: var(--tag-color);
   opacity: 1;
 }
 
@@ -1067,11 +1242,19 @@ body {
    20. Misc — Scrollbar, Search, etc.
    ----------------------------------------------------------------------------- */
 .theme-light ::-webkit-scrollbar-thumb {
-  background-color: #c0c0c0;
+  background-color: var(--scrollbar-thumb-bg);
 }
 
 .theme-light ::-webkit-scrollbar-thumb:hover {
-  background-color: #a0a0a0;
+  background-color: var(--scrollbar-active-thumb-bg);
+}
+
+.theme-dark ::-webkit-scrollbar-thumb {
+  background-color: var(--scrollbar-thumb-bg);
+}
+
+.theme-dark ::-webkit-scrollbar-thumb:hover {
+  background-color: var(--scrollbar-active-thumb-bg);
 }
 
 /* -----------------------------------------------------------------------------
@@ -1096,17 +1279,50 @@ body {
    ----------------------------------------------------------------------------- */
 
 /* ---- 22a. Modal overlay / backdrop ---- */
-.modal-bg {
-  background: rgba(0, 0, 0, 0.08) !important;
+.theme-light .modal-bg {
+  background: rgba(0, 0, 0, 0.05) !important;
+  backdrop-filter: blur(0.5px);
+  -webkit-backdrop-filter: blur(0.5px);
+  opacity: 1 !important;
+}
+
+.theme-dark .modal-bg {
+  background: rgba(0, 0, 0, 0.6) !important;
+  backdrop-filter: blur(0.5px);
+  -webkit-backdrop-filter: blur(0.5px);
   opacity: 1 !important;
 }
 
 /* ---- 22b. Modal dialog box ---- */
-.modal {
+.theme-light .modal {
   background: #ffffff;
   border: 1px solid #c1c9d0;
   border-radius: 0.5em;
   box-shadow: 0 0 20px rgba(108, 117, 125, 0.41);
+}
+
+.theme-dark .modal {
+  background: #161b22;
+  border: 1px solid #30363d;
+  border-radius: 0.5em;
+  box-shadow: 0 0 20px rgba(0, 0, 0, 0.6);
+}
+
+/* Settings modal — use internal layout spacing instead of modal padding */
+.theme-light .modal.mod-settings {
+  padding: 0;
+}
+
+.theme-dark .modal.mod-settings {
+  padding: 0;
+}
+
+/* Non-settings modals (prompts, confirmations) keep outer padding */
+.theme-light .modal:not(.mod-settings) {
+  padding: 1.5rem;
+}
+
+.theme-dark .modal:not(.mod-settings) {
   padding: 1.5rem;
 }
 
@@ -1115,15 +1331,27 @@ body {
   font-weight: 700;
 }
 
-.modal-close-button {
+.theme-light .modal-close-button {
   color: #777777;
   top: 7px;
   right: 7px;
 }
 
-.modal-close-button:hover {
+.theme-light .modal-close-button:hover {
   color: #333333;
   background: #f0f0f0;
+  border-radius: 4px;
+}
+
+.theme-dark .modal-close-button {
+  color: #8b949e;
+  top: 7px;
+  right: 7px;
+}
+
+.theme-dark .modal-close-button:hover {
+  color: #e6edf3;
+  background: #21262d;
   border-radius: 4px;
 }
 
@@ -1135,28 +1363,49 @@ body {
   font-size: 13px;
 }
 
-.modal button.mod-cta {
+.theme-light .modal button.mod-cta {
   background-color: #1a82fb;
   border-color: transparent;
   color: #ffffff;
 }
 
-.modal button.mod-cta:hover {
+.theme-light .modal button.mod-cta:hover {
   background-color: rgba(26, 130, 251, 0.9);
   border-color: transparent;
 }
 
-.modal button:not(.mod-cta):not(.mod-warning) {
+.theme-dark .modal button.mod-cta {
+  background-color: #238636;
+  border-color: transparent;
+  color: #ffffff;
+}
+
+.theme-dark .modal button.mod-cta:hover {
+  background-color: rgba(35, 134, 54, 0.9);
+  border-color: transparent;
+}
+
+.theme-light .modal button:not(.mod-cta):not(.mod-warning) {
   background-color: #ffffff;
   border: 1px solid #d0d0d0;
   color: #333333;
 }
 
-.modal button:not(.mod-cta):not(.mod-warning):hover {
+.theme-light .modal button:not(.mod-cta):not(.mod-warning):hover {
   background-color: #f0f0f0;
 }
 
-.modal button:disabled {
+.theme-dark .modal button:not(.mod-cta):not(.mod-warning) {
+  background-color: #21262d;
+  border: 1px solid #30363d;
+  color: #e6edf3;
+}
+
+.theme-dark .modal button:not(.mod-cta):not(.mod-warning):hover {
+  background-color: #30363d;
+}
+
+.theme-light .modal button:disabled {
   background: #9e9e9e;
   opacity: 0.5;
   cursor: not-allowed;
@@ -1164,73 +1413,131 @@ body {
   box-shadow: none;
 }
 
-.modal button.mod-warning {
+.theme-dark .modal button:disabled {
+  background: #484f58;
+  opacity: 0.4;
+  cursor: not-allowed;
+  border-color: #484f58;
+  box-shadow: none;
+}
+
+.theme-light .modal button.mod-warning {
   background-color: transparent;
   color: #d32f2f;
 }
 
+.theme-dark .modal button.mod-warning {
+  background-color: transparent;
+  color: #f85149;
+}
+
 /* ---- 22d. Settings panel — sidebar (left nav) ---- */
-.modal.mod-settings .vertical-tab-header {
+.theme-light .modal.mod-settings .vertical-tab-header {
   background-color: #f5f5f4;
   border-right: 1px solid #ddd;
   padding-top: 18px;
 }
 
-.modal.mod-settings .vertical-tab-header-group-title {
+.theme-dark .modal.mod-settings .vertical-tab-header {
+  background-color: #0d1117;
+  border-right: 1px solid #21262d;
+  padding-top: 18px;
+}
+
+.theme-light .modal.mod-settings .vertical-tab-header-group-title {
   font-size: 11px;
   font-weight: 600;
   text-transform: uppercase;
   letter-spacing: 0.05em;
   color: #888888;
-  padding: 8px 16px 4px;
+  padding: 4px 16px 2px;
 }
 
-.modal.mod-settings .vertical-tab-nav-item {
+.theme-dark .modal.mod-settings .vertical-tab-header-group-title {
+  color: #6e7681;
+}
+
+.theme-light .modal.mod-settings .vertical-tab-nav-item {
   font-size: 13px;
   color: #333333;
-  padding: 6px 16px;
+  padding: 4px 16px;
   margin: 0 8px;
   border-radius: 6px;
   border: none;
 }
 
-.modal.mod-settings .vertical-tab-nav-item:hover {
+.theme-light .modal.mod-settings .vertical-tab-nav-item:hover {
   background-color: rgba(229, 229, 229, 0.59);
   color: #333333;
 }
 
-.modal.mod-settings .vertical-tab-nav-item.is-active {
+.theme-light .modal.mod-settings .vertical-tab-nav-item.is-active {
   background-color: #e5e5e5;
   color: #333333;
   font-weight: 600;
 }
 
+.theme-dark .modal.mod-settings .vertical-tab-nav-item {
+  font-size: 13px;
+  color: #e6edf3;
+  padding: 4px 16px;
+  margin: 0 8px;
+  border-radius: 6px;
+  border: none;
+}
+
+.theme-dark .modal.mod-settings .vertical-tab-nav-item:hover {
+  background-color: rgba(48, 54, 61, 0.59);
+  color: #e6edf3;
+}
+
+.theme-dark .modal.mod-settings .vertical-tab-nav-item.is-active {
+  background-color: #30363d;
+  color: #e6edf3;
+  font-weight: 600;
+}
+
 /* ---- 22e. Settings panel — content area (right side) ---- */
-.modal.mod-settings .vertical-tab-content-container {
+.theme-light .modal.mod-settings .vertical-tab-content-container {
   background-color: #ffffff;
-  padding-top: 16px;
+  padding: 0;
+}
+
+.theme-dark .modal.mod-settings .vertical-tab-content-container {
+  background-color: #0d1117;
+  padding: 0;
 }
 
 .modal.mod-settings .vertical-tab-content {
-  padding: 0 24px;
+  padding: 6px 24px 24px;
 }
 
 /* ---- 22f. Settings — individual setting rows ---- */
 .setting-item {
   border-top: none;
-  padding: 12px 0;
+  padding: 8px 0;
 }
 
-.setting-item-name {
+.theme-light .setting-item-name {
   font-size: 14px;
   font-weight: 500;
   color: #333333;
 }
 
-.setting-item-description {
+.theme-dark .setting-item-name {
+  font-size: 14px;
+  font-weight: 500;
+  color: #e6edf3;
+}
+
+.theme-light .setting-item-description {
   font-size: 12px;
   color: #888888;
   line-height: 1.4;
+}
+
+.theme-dark .setting-item-description {
+  color: #8b949e;
 }
 
 .setting-item-heading {
@@ -1238,24 +1545,28 @@ body {
   margin-bottom: 8px;
 }
 
-.setting-item-heading .setting-item-name {
+.theme-light .setting-item-heading .setting-item-name {
   font-size: 13px;
   font-weight: 700;
   color: #555555;
 }
 
+.theme-dark .setting-item-heading .setting-item-name {
+  color: #8b949e;
+}
+
 /* ---- 22g. Form inputs (text, search, select, number) ---- */
-.setting-item input[type="text"],
-.setting-item input[type="search"],
-.setting-item input[type="number"],
-.setting-item input[type="password"],
-.setting-item select,
-.setting-item textarea,
-.modal input[type="text"],
-.modal input[type="search"],
-.modal input[type="number"],
-.modal select,
-.search-input-container input {
+.theme-light .setting-item input[type="text"],
+.theme-light .setting-item input[type="search"],
+.theme-light .setting-item input[type="number"],
+.theme-light .setting-item input[type="password"],
+.theme-light .setting-item select,
+.theme-light .setting-item textarea,
+.theme-light .modal input[type="text"],
+.theme-light .modal input[type="search"],
+.theme-light .modal input[type="number"],
+.theme-light .modal select,
+.theme-light .search-input-container input {
   border: 1px solid #d0d0d0;
   border-radius: 4px;
   background: #ffffff;
@@ -1264,40 +1575,66 @@ body {
   padding: 4px 10px 4px 28px;
 }
 
-.setting-item input:focus,
-.modal input:focus,
-.search-input-container input:focus {
+.theme-dark .setting-item input[type="text"],
+.theme-dark .setting-item input[type="search"],
+.theme-dark .setting-item input[type="number"],
+.theme-dark .setting-item input[type="password"],
+.theme-dark .setting-item select,
+.theme-dark .setting-item textarea,
+.theme-dark .modal input[type="text"],
+.theme-dark .modal input[type="search"],
+.theme-dark .modal input[type="number"],
+.theme-dark .modal select,
+.theme-dark .search-input-container input {
+  border: 1px solid #30363d;
+  border-radius: 4px;
+  background: #0d1117;
+  color: #e6edf3;
+  font-size: 13px;
+  padding: 4px 10px 4px 28px;
+}
+
+.theme-light .setting-item input:focus,
+.theme-light .modal input:focus,
+.theme-light .search-input-container input:focus {
   border-color: #6eace2;
   box-shadow: 0 0 0 2px rgba(110, 172, 226, 0.3);
   outline: none;
 }
 
+.theme-dark .setting-item input:focus,
+.theme-dark .modal input:focus,
+.theme-dark .search-input-container input:focus {
+  border-color: #79c0ff;
+  box-shadow: 0 0 0 2px rgba(121, 192, 255, 0.3);
+  outline: none;
+}
+
 /* ---- 22h. Toggle switches ---- */
-.checkbox-container {
+/* Only override colors — keep Obsidian's default dimensions and positioning */
+.theme-light .checkbox-container {
   background-color: #d0d0d0;
   border: none;
   box-shadow: inset 0 0 1px rgba(0, 0, 0, 0.15);
-  width: 40px;
-  height: 22px;
-  border-radius: 26px;
 }
 
-.checkbox-container.is-enabled {
+.theme-light .checkbox-container.is-enabled {
   background-color: #1a82fb;
 }
 
-.checkbox-container:after {
-  background: #ffffff;
+.theme-dark .checkbox-container {
+  background-color: #30363d;
   border: none;
-  height: 18px;
-  width: 18px;
-  border-radius: 50%;
-  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.2);
+  box-shadow: inset 0 0 1px rgba(0, 0, 0, 0.3);
+}
+
+.theme-dark .checkbox-container.is-enabled {
+  background-color: #238636;
 }
 
 /* ---- 22i. Dropdowns / Selects ---- */
-select,
-.dropdown {
+.theme-light select,
+.theme-light .dropdown {
   border: 1px solid #d0d0d0;
   border-radius: 4px;
   background: #ffffff;
@@ -1305,25 +1642,50 @@ select,
   font-size: 13px;
 }
 
-select:hover,
-.dropdown:hover {
+.theme-light select:hover,
+.theme-light .dropdown:hover {
   border-color: #b0b0b0;
   background-color: #fafafa;
 }
 
+.theme-dark select,
+.theme-dark .dropdown {
+  border: 1px solid #30363d;
+  border-radius: 4px;
+  background: #0d1117;
+  color: #e6edf3;
+  font-size: 13px;
+}
+
+.theme-dark select:hover,
+.theme-dark .dropdown:hover {
+  border-color: #404854;
+  background-color: #161b22;
+}
+
 /* ---- 22j. Plugin / Theme lists ---- */
-.community-theme.is-selected,
-.community-plugin.is-selected {
+.theme-light .community-theme.is-selected,
+.theme-light .community-plugin.is-selected {
   background-color: #f0f0f0;
 }
 
-.community-theme:hover,
-.community-plugin:hover {
+.theme-light .community-theme:hover,
+.theme-light .community-plugin:hover {
   background-color: #f5f5f5;
 }
 
+.theme-dark .community-theme.is-selected,
+.theme-dark .community-plugin.is-selected {
+  background-color: #21262d;
+}
+
+.theme-dark .community-theme:hover,
+.theme-dark .community-plugin:hover {
+  background-color: #161b22;
+}
+
 /* ---- 22k. Hotkey input ---- */
-.setting-hotkey {
+.theme-light .setting-hotkey {
   background-color: #f5f5f5;
   border: 1px solid #d0d0d0;
   border-radius: 4px;
@@ -1332,44 +1694,108 @@ select:hover,
   font-family: var(--font-monospace);
 }
 
+.theme-dark .setting-hotkey {
+  background-color: #21262d;
+  border: 1px solid #30363d;
+  border-radius: 4px;
+  padding: 4px 10px;
+  font-size: 13px;
+  color: #e6edf3;
+  font-family: var(--font-monospace);
+}
+
 /* ---- 22l. Prompt / Command palette ---- */
-.prompt,
-.suggestion-container {
+.theme-light .prompt,
+.theme-light .suggestion-container {
   background: #ffffff;
   border: 1px solid #c1c9d0;
   border-radius: 0.5em;
   box-shadow: 0 0 20px rgba(108, 117, 125, 0.41);
 }
 
-.prompt-input-container input,
-.suggestion-container input {
+.theme-dark .prompt,
+.theme-dark .suggestion-container {
+  background: #161b22;
+  border: 1px solid #30363d;
+  border-radius: 0.5em;
+  box-shadow: 0 0 20px rgba(0, 0, 0, 0.6);
+}
+
+.theme-light .prompt-input-container input,
+.theme-light .suggestion-container input {
   border: none;
   background: transparent;
   font-size: 14px;
 }
 
-.suggestion-item {
+.theme-dark .prompt-input-container input,
+.theme-dark .suggestion-container input {
+  border: none;
+  background: transparent;
+  font-size: 14px;
+  color: #e6edf3;
+}
+
+.theme-light .suggestion-item {
   padding: 6px 16px;
   font-size: 13px;
 }
 
-.suggestion-item.is-selected {
+.theme-light .suggestion-item.is-selected {
   background-color: rgba(229, 229, 229, 0.59);
   color: #333333;
 }
 
-.suggestion-item:hover {
+.theme-light .suggestion-item:hover {
   background-color: #f0f0f0;
 }
 
+.theme-dark .suggestion-item {
+  padding: 6px 16px;
+  font-size: 13px;
+  color: #e6edf3;
+}
+
+.theme-dark .suggestion-item.is-selected {
+  background-color: rgba(48, 54, 61, 0.59);
+  color: #e6edf3;
+}
+
+.theme-dark .suggestion-item:hover {
+  background-color: #21262d;
+}
+
 /* ---- 22m. Scrollbar in settings ---- */
+/* 当前: 隐藏滚动条 */
 .modal ::-webkit-scrollbar {
   display: none;
 }
 
+/* --- 旧配置(保留供参考) --- */
+/*
+   .modal ::-webkit-scrollbar {
+     width: 8px;
+   }
+   .modal ::-webkit-scrollbar { width: 8px; }
+   .modal ::-webkit-scrollbar-thumb {
+     background-color: #c0c0c0;
+     border-radius: 4px;
+     border: 2px solid transparent;
+     background-clip: padding-box;
+     min-height: 30px;
+   }
+   .modal ::-webkit-scrollbar-thumb:hover { background-color: #a0a0a0; } */
+
 /* =============================================================================
    Performance Optimization — Disable Unnecessary Visual Effects
+   Merged from performance-optimization.css
    ============================================================================= */
+
+/* 禁用模态对话框背景虚化效果 */
+.modal-bg {
+  backdrop-filter: none !important;
+  -webkit-backdrop-filter: none !important;
+}
 
 /* 禁用对话框的过渡动画 */
 .modal {

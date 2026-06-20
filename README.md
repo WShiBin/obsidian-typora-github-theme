@@ -40,7 +40,7 @@
 - 📐 **Adaptive Editor Width** — Content width adjusts to your screen size (860px / 1024px / 1200px), just like Typora
 - �️ **Centered Images** — Images are automatically centered in both reading and editing views, just like Typora
 - �🖋️ **Typora Typography** — Carefully matched font stack, spacing, and line heights for a clean writing experience
-- 🌙 **Light Theme Only** — Currently supports light mode, matching Typora's GitHub theme
+- 🌙 **Light & Dark Mode** — Supports both light and dark modes with system-level detection, matching GitHub's light and dark themes
 - ⚡ **Performance Optimized** — Disables unnecessary animations and visual effects for a snappy experience
 - 🪟 **Settings Dialog Styling** — Typora-inspired preferences panel with polished form controls
 

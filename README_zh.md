@@ -1,5 +1,5 @@
 <p align="center">
-  <img src="https://raw.githubusercontent.com/WShiBin/obsidian-typora-github-theme/main/assets/icon.png" alt="GitHub Style Theme" width="128" height="128">
+  <img src="https://raw.githubusercontent.com/WShiBin/obsidian-typora-github-theme/main/assets/icon.png" alt="GitHub Style" width="128" height="128">
 </p>
 
 <h1 align="center">GitHub Style Theme for Obsidian</h1>
@@ -50,14 +50,14 @@
 
 1. 打开 **设置** → **外观**
 2. 在 **主题** 下，点击 **浏览**
-3. 搜索 **"GitHub Style Theme"**
+3. 搜索 **"GitHub Style"**
 4. 点击 **安装**，然后点击 **切换**
 
 ### 手动安装
 
 1. 从[发布页面](https://github.com/WShiBin/obsidian-typora-github-theme/releases)下载最新版本
 2. 将内容解压到你的 vault 的 `.obsidian/themes/` 目录下
-3. 进入 **设置** → **外观** → **主题**，选择 **GitHub Style Theme**
+3. 进入 **设置** → **外观** → **主题**，选择 **GitHub Style**
 
 ## 开发
 

@@ -1,5 +1,5 @@
 <p align="center">
-  <img src="https://raw.githubusercontent.com/WShiBin/obsidian-typora-github-theme/main/assets/icon.png" alt="GitHub Style Theme" width="128" height="128">
+  <img src="https://raw.githubusercontent.com/WShiBin/obsidian-typora-github-theme/main/assets/icon.png" alt="GitHub Style" width="128" height="128">
 </p>
 
 <h1 align="center">GitHub Style Theme for Obsidian</h1>
@@ -50,14 +50,14 @@
 
 1. Open **Settings** → **Appearance**
 2. Under **Themes**, click **Browse**
-3. Search for **"GitHub Style Theme"**
+3. Search for **"GitHub Style"**
 4. Click **Install** and then **Switch**
 
 ### Manual Installation
 
 1. Download the latest release from the [releases page](https://github.com/WShiBin/obsidian-typora-github-theme/releases)
 2. Extract the contents to your vault's `.obsidian/themes/` directory
-3. Go to **Settings** → **Appearance** → **Themes** and select **GitHub Style Theme**
+3. Go to **Settings** → **Appearance** → **Themes** and select **GitHub Style**
 
 ## Development
 
